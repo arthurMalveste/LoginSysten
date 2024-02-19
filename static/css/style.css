@@ -1,0 +1,140 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+p {
+  font-size: 12px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.img {
+  max-width: 300px;
+  border-radius: 50%;
+  border-left: #4caf50 solid 1px;
+}
+.ddperfil{
+  padding: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.ftperfil {
+  padding-right: 50px;
+  border-right: #4caf50 solid 1px;
+}
+
+.perfilnome, .perfilemail, .perfilsenha {
+  display: flex;
+  padding: 20px;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.nome, .email, .senha {
+  padding-right: 10px;
+}
+
+.nome, .email, .senha, .nome1, .email1, .senha1 {
+  font-size: 22px;
+}
+.nome1, .email1, .senha1 {
+  padding: 5px;
+  border-radius: 7px;
+  background-color: #c9f0c9;
+  border: #4caf50 solid 1px;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #000000; /* Cor da seta */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.corner-container {
+  position: fixed;
+  top: 10px;
+  border-bottom: solid 3px #4caf50;
+  left: 10px;
+  border-right: solid 3px #4caf50;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.divaccont {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  max-width: 200px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border-radius: 10px;
+  border-bottom: solid 3px #4caf50;
+  border-right: solid 3px #4caf50;
+  background-color: #ffffff;
+}
+
+.accont{
+  max-width: 22%;
+}
+
+.h3perfil{
+  color: #4caf50;
+}

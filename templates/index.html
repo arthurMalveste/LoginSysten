@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <section>
+    <a href="/perfil">
+      <div class="divaccont">
+
+          <img class="accont" src="/static/img/accont.png" alt="">
+          <h3 class="h3perfil">  nome  </h3>
+
+      </div>
+    </a>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post" action="/cadastro">
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="email" required>
+            <br>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="senha" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Você já tem conta ? <a href="cadastra">Cadastre-se agora</a></p>
+    </div>
+  </section>
+  
+  </body>
+</html>
