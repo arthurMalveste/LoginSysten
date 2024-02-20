@@ -5,17 +5,16 @@ from flask import request
 import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:5e5i_123@localhost/sistema'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:5e5i_123@localhost/projeto'
 app.config['TIMEZONE'] = 'America/Sao_Paulo'  # Substitua pelo seu fuso horário
 db = SQLAlchemy(app)
 
 # parte do banco de dados
 class Pessoa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100),unique=True, nullable=False)
     senha = db.Column(db.String(20), nullable=False)
-    telefone = db.Column(db.String(11), unique=True)
-    preferencia = db.Column(db.String(100), nullable=False)
 
 @app.route('/')
 def index():
@@ -36,19 +35,24 @@ def perfil():
 def cadastro():
 
     if request.method == 'POST':
-        email = request.form['email']
-        senha = request.form['senha']
+        try:
+            nome = request.form['nome']
+            email = request.form['email']
+            senha = request.form['senha']
+        except KeyError as e:
+            # Lidar com campos de formulário ausentes
+            return "Erro: o campo necessário '{}' está ausente.".format(e.args[0]), 400
 
         pessoa = Pessoa(
+            nome=nome,
             email=email,
             senha=senha
-            )
+        )
 
         db.session.add(pessoa)
         db.session.commit()     
-        return redirect('/cadastro')
-    return render_template('index.html')
-
+        return redirect('/')
+    return redirect('/')
 
 if __name__ == '__main__':
     with app.app_context():
