@@ -1,5 +1,5 @@
 
-from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask, jsonify, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 import datetime
@@ -18,8 +18,11 @@ class Pessoa(db.Model):
 
 @app.route('/')
 def index():
+    msg_cadastro = ""
+    return render_template('index.html', msg_cadastro=msg_cadastro)
 
-    return render_template('index.html')
+
+
 
 @app.route('/cadastra')
 def cadastra():
@@ -33,26 +36,34 @@ def perfil():
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
-
     if request.method == 'POST':
         try:
             nome = request.form['nome']
             email = request.form['email']
             senha = request.form['senha']
+            confirm_senha = request.form['confirm_senha']
         except KeyError as e:
             # Lidar com campos de formulário ausentes
             return "Erro: o campo necessário '{}' está ausente.".format(e.args[0]), 400
+        
+        if senha == confirm_senha:
+            pessoa = Pessoa(
+                nome=nome,
+                email=email,
+                senha=senha
+            )
+           
+            db.session.add(pessoa)
+            db.session.commit()     
+        else:
+            msg_cadastro = "As senhas não coincidem!"
 
-        pessoa = Pessoa(
-            nome=nome,
-            email=email,
-            senha=senha
-        )
-
-        db.session.add(pessoa)
-        db.session.commit()     
         return redirect('/')
-    return redirect('/')
+    
+    return render_template('cadastro.html', msg_cadastro=msg_cadastro, confirm_senha=confirm_senha)
+
+
+    
 
 if __name__ == '__main__':
     with app.app_context():
