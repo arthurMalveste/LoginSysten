@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import request
 import datetime
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:5e5i_123@localhost/projeto'
 app.config['TIMEZONE'] = 'America/Sao_Paulo'  # Substitua pelo seu fuso horário
@@ -33,6 +34,16 @@ def cadastra():
 def perfil():
 
     return render_template('usuario.html')
+
+@app.route('/error404')
+def error():
+
+    return render_template('404.html')
+
+@app.route('/error500')
+def error500():
+
+    return render_template('500.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
