@@ -13,4 +13,3 @@ del alunos["novo"]
 
 for chave, valor in alunos.items():
     print(chave, valor)
-    

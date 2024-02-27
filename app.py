@@ -1,16 +1,12 @@
-
 from flask import Flask, jsonify, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
-from flask import request
-import datetime
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:5e5i_123@localhost/projeto'
 app.config['TIMEZONE'] = 'America/Sao_Paulo'  # Substitua pelo seu fuso horário
 db = SQLAlchemy(app)
 
-# parte do banco de dados
+# Parte do banco de dados
 class Pessoa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -22,28 +18,13 @@ def index():
     msg_cadastro = ""
     return render_template('index.html', msg_cadastro=msg_cadastro)
 
-
-
-
 @app.route('/cadastra')
 def cadastra():
-
     return render_template('cadastra.html')
 
 @app.route('/perfil')
 def perfil():
-
     return render_template('usuario.html')
-
-@app.route('/error404')
-def error():
-
-    return render_template('404.html')
-
-@app.route('/error500')
-def error500():
-
-    return render_template('500.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -73,10 +54,17 @@ def cadastro():
     
     return render_template('cadastro.html', msg_cadastro=msg_cadastro, confirm_senha=confirm_senha)
 
+# Manipulador de erro para página não encontrada (Erro 404)
+@app.errorhandler(404)
+def pagina_nao_encontrada_erro(error):
+    return render_template('404.html'), 404
 
-    
+# Manipulador de erro para erro interno do servidor (Erro 500)
+@app.errorhandler(500)
+def erro_interno_erro(error):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(debug=False)
